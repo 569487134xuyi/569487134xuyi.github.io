@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://569487134xuyi.github.io</id>
     <title>Gridea</title>
-    <updated>2019-06-23T06:10:14.076Z</updated>
+    <updated>2019-06-23T06:16:55.896Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://569487134xuyi.github.io"/>
     <link rel="self" href="https://569487134xuyi.github.io/atom.xml"/>
@@ -10,6 +10,103 @@
     <logo>https://569487134xuyi.github.io/images/avatar.png</logo>
     <icon>https://569487134xuyi.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[Docker]]></title>
+        <id>https://569487134xuyi.github.io/post/docker</id>
+        <link href="https://569487134xuyi.github.io/post/docker">
+        </link>
+        <updated>2019-06-09T09:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>docker 安装配置</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>docker 安装配置</p>
+<!-- more -->
+<h1 id="docker-安装">docker 安装</h1>
+<hr>
+<h2 id="一键脚本安装">一键脚本安装</h2>
+<pre><code class="language-bash">curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+</code></pre>
+<h2 id="手动安装">手动安装</h2>
+<h3 id="卸载旧版本">卸载旧版本</h3>
+<pre><code class="language-bash">sudo apt-get remove docker docker-engine docker.io containerd runc
+</code></pre>
+<h3 id="使用存储库安装">使用存储库安装</h3>
+<h4 id="更新-apt-包索引">更新 apt 包索引</h4>
+<pre><code class="language-bash">sudo apt-get update
+</code></pre>
+<h4 id="安装包以允许-apt-通过-https-使用存储库">安装包以允许 apt 通过 HTTPS 使用存储库</h4>
+<pre><code class="language-bash">sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+</code></pre>
+<h4 id="添加-docker-的官方-gpg-密钥">添加 Docker 的官方 GPG 密钥</h4>
+<pre><code class="language-bash">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+</code></pre>
+<p>验证您现在拥有带指纹的密钥</p>
+<pre><code class="language-bash">sudo apt-key fingerprint 0EBFCD88
+</code></pre>
+<h4 id="使用以下命令设置稳定存储库">使用以下命令设置稳定存储库</h4>
+<h5 id="x86_64-amd64-架构">x86_64 / amd64 架构</h5>
+<pre><code>sudo add-apt-repository \
+   &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable&quot;
+</code></pre>
+<p>ubuntu 自己改系统
+$(lsb_release -cs) 自己改版本号，否则出各种问题
+<a href="https://mirrors.aliyun.com/docker-ce/linux/">阿里源 docker-ce</a></p>
+<h5 id="arm-架构">arm 架构</h5>
+<pre><code class="language-bash">sudo add-apt-repository \
+   &quot;deb [arch=armhf] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable&quot;
+</code></pre>
+<p>同上</p>
+<h4 id="安装-docker-ce">安装 DOCKER CE</h4>
+<pre><code class="language-bash">sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+</code></pre>
+<h3 id="将当前用户加入-docker-用户组">将当前用户加入 docker 用户组</h3>
+<pre><code class="language-bash">sudo groupadd docker     #添加docker用户组
+sudo gpasswd -a $USER docker     #将登陆用户加入到docker用户组中
+newgrp docker     #更新用户组
+</code></pre>
+<h3 id="验证安装">验证安装</h3>
+<pre><code>docker ps
+</code></pre>
+<p>通过运行 hello-world 映像验证是否正确安装了 Docker CE</p>
+<h3 id="配置-docker-以在启动时启动">配置 Docker 以在启动时启动</h3>
+<pre><code class="language-bash">sudo systemctl enable docker
+</code></pre>
+<p>取消开机启动</p>
+<pre><code class="language-bash">sudo systemctl disable docker
+</code></pre>
+<h3 id="跟换国内仓库">跟换国内仓库</h3>
+<pre><code> sudo vim /etc/docker/daemon.json
+</code></pre>
+<p>写入</p>
+<pre><code>{
+ &quot;registry-mirrors&quot;: [&quot;https://registry.docker-cn.com&quot;]
+}
+</code></pre>
+<p>重启 docker</p>
+<pre><code>sudo service docker restart
+</code></pre>
+<h3 id="docker-portainer-单机安装">docker Portainer 单机安装</h3>
+<pre><code>docker search portainer
+docker pull portainer/portainer
+docker run -d -p 9000:9000 \
+    --restart=always \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    --name prtainer \
+    portainer/portainer
+</code></pre>
+<p>访问地址 IP:PORT，第一次输入用户名及密码</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[hexo]]></title>
         <id>https://569487134xuyi.github.io/post/hexo</id>
