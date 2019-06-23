@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://569487134xuyi.github.io</id>
     <title>Gridea</title>
-    <updated>2019-06-23T05:55:12.123Z</updated>
+    <updated>2019-06-23T05:59:22.027Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://569487134xuyi.github.io"/>
     <link rel="self" href="https://569487134xuyi.github.io/atom.xml"/>
@@ -10,6 +10,80 @@
     <logo>https://569487134xuyi.github.io/images/avatar.png</logo>
     <icon>https://569487134xuyi.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[hexo]]></title>
+        <id>https://569487134xuyi.github.io/post/hexo</id>
+        <link href="https://569487134xuyi.github.io/post/hexo">
+        </link>
+        <updated>2019-06-02T11:30:00.000Z</updated>
+        <content type="html"><![CDATA[<hr>
+<h2 id="title-hexo搭建date-2019-06-02-193000tags-hexo">title: hexo搭建
+date: 2019-06-02 19:30:00
+tags: hexo</h2>
+<h1 id="githubhexo-搭建">github+hexo 搭建</h1>
+<hr>
+<h2 id="github-部分">github 部分</h2>
+<p><a href="https://github.com/">github.com</a><br>
+github.com 注册<br>
+你的 github 地址：github.com/username（你的注册名）<br>
+start a project 按钮新建一个 repositories（仓库）<br>
+仓库名：username <font color=#008000><strong>(和上面一样，这里不要用别的)</strong></font>.github.io<br>
+creat repository 创建仓库</p>
+<hr>
+<h2 id="git-及-nodejs-安装">git 及 node.js 安装</h2>
+<p><a href="https://git-scm.com/">git</a><br>
+一直下一步不多说
+安装完了右键 git bash</p>
+<pre><code class="language-bash">git config user.name 'github用户名'
+git config user.email '邮箱'
+</code></pre>
+<p><a href="https://nodejs.org/en/">node.js</a><br>
+下载完一直下一步安装</p>
+<pre><code>node -v
+npm -v
+git -version
+</code></pre>
+<p>看一下 node.js,npm,git 版本信息<br>
+以上没成功，环境变量自己再看下</p>
+<hr>
+<h2 id="hexo-部分">hexo 部分</h2>
+<p><a href="https://hexo.io/zh-cn/">hexo.io</a><br>
+右键 git bash here<br>
+输入以下</p>
+<pre><code class="language-bash">npm install hexo-cli -g
+hexo init blog
+cd blog
+npm install
+hexo server
+</code></pre>
+<p>安装出现 warn 都不要管<br>
+上面会自动创建一个 blog 文件夹，进入 blog 并启动 hexo<br>
+地址在本地 4000 端口<br>
+<a href="http://localhost:4000/">http://localhost:4000/</a></p>
+<p>在 blog/source/_posts 下有自动创建的一篇 helloworld 的初始化文章</p>
+<p>如果想要添加新的文章，可以在命令行输入 hexo new 'filename',就会生成一个新的.md 文件，对它编辑就可以了</p>
+<hr>
+<h2 id="上传至-github">上传至 github</h2>
+<p>开配置文档_config.yml，对它做如下修改</p>
+<pre><code>deploy:
+  type: git
+  repo: git@github.com:username/username.github.io.git
+  branch: master
+</code></pre>
+<p>git bash 中输入</p>
+<pre><code>npm install hexo-deployer-git --save
+</code></pre>
+<p>安装 git 插件
+再输入</p>
+<pre><code>hexo g
+hexo d
+</code></pre>
+<p>开始上传<br>
+打开 username.github.io blog 就部署好了</p>
+<hr>
+<p>结束</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://569487134xuyi.github.io/post/hello-gridea</id>
