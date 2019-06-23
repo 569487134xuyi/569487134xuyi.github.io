@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://569487134xuyi.github.io</id>
     <title>Gridea</title>
-    <updated>2019-06-23T05:59:22.027Z</updated>
+    <updated>2019-06-23T06:10:14.076Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://569487134xuyi.github.io"/>
     <link rel="self" href="https://569487134xuyi.github.io/atom.xml"/>
@@ -16,10 +16,10 @@
         <link href="https://569487134xuyi.github.io/post/hexo">
         </link>
         <updated>2019-06-02T11:30:00.000Z</updated>
-        <content type="html"><![CDATA[<hr>
-<h2 id="title-hexo搭建date-2019-06-02-193000tags-hexo">title: hexo搭建
-date: 2019-06-02 19:30:00
-tags: hexo</h2>
+        <summary type="html"><![CDATA[<p>github+hexo 搭建</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>github+hexo 搭建</p>
+<!-- more -->
 <h1 id="githubhexo-搭建">github+hexo 搭建</h1>
 <hr>
 <h2 id="github-部分">github 部分</h2>
