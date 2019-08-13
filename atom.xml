@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://569487134xuyi.github.io</id>
     <title>xuyi.blog</title>
-    <updated>2019-06-23T06:44:53.675Z</updated>
+    <updated>2019-08-13T12:30:29.076Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://569487134xuyi.github.io"/>
     <link rel="self" href="https://569487134xuyi.github.io/atom.xml"/>
@@ -10,6 +10,27 @@
     <logo>https://569487134xuyi.github.io/images/avatar.png</logo>
     <icon>https://569487134xuyi.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, xuyi.blog</rights>
+    <entry>
+        <title type="html"><![CDATA[酸酸乳]]></title>
+        <id>https://569487134xuyi.github.io/post/suan-suan-ru</id>
+        <link href="https://569487134xuyi.github.io/post/suan-suan-ru">
+        </link>
+        <updated>2019-08-13T12:05:34.000Z</updated>
+        <content type="html"><![CDATA[<p>#服务器推荐<br>
+<a href="https://www.vultr.com">www.vultr.com</a><br>
+#命令</p>
+<pre><code>wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh &amp;&amp; chmod +x ssr.sh &amp;&amp; bash ssr.sh
+</code></pre>
+<p>按提示</p>
+<pre><code>wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/serverspeeder/master/serverspeeder-all.sh &amp;&amp; bash serverspeeder-all.sh
+</code></pre>
+<p>重启</p>
+<pre><code>reboot
+</code></pre>
+<p>#windows客户端<br>
+<a href="https://github.com/shadowsocksr-backup/shadowsocksr-csharp/releases">github地址</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Docker]]></title>
         <id>https://569487134xuyi.github.io/post/docker</id>
@@ -55,8 +76,8 @@ sudo sh get-docker.sh
    $(lsb_release -cs) \
    stable&quot;
 </code></pre>
-<p>ubuntu 自己改系统
-$(lsb_release -cs) 自己改版本号，否则出各种问题
+<p>ubuntu 自己改系统<br>
+$(lsb_release -cs) 自己改版本号，否则出各种问题<br>
 <a href="https://mirrors.aliyun.com/docker-ce/linux/">阿里源 docker-ce</a></p>
 <h5 id="arm-架构">arm 架构</h5>
 <pre><code class="language-bash">sudo add-apt-repository \
@@ -129,7 +150,7 @@ creat repository 创建仓库</p>
 <hr>
 <h2 id="git-及-nodejs-安装">git 及 node.js 安装</h2>
 <p><a href="https://git-scm.com/">git</a><br>
-一直下一步不多说
+一直下一步不多说<br>
 安装完了右键 git bash</p>
 <pre><code class="language-bash">git config user.name 'github用户名'
 git config user.email '邮箱'
@@ -170,7 +191,7 @@ hexo server
 <p>git bash 中输入</p>
 <pre><code>npm install hexo-deployer-git --save
 </code></pre>
-<p>安装 git 插件
+<p>安装 git 插件<br>
 再输入</p>
 <pre><code>hexo g
 hexo d
