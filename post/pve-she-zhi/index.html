@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>hexo | xuyi.blog</title>
+<title>PVE设置 | xuyi.blog</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -92,94 +92,37 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">hexo</h2>
-            <div class="post-date">2019-06-02</div>
-            
-              <div class="feature-container" style="background-image: url('https://569487134xuyi.github.io/post-images/hexo.jpg')">
-              </div>
+            <h2 class="post-title">PVE设置</h2>
+            <div class="post-date">2019-08-27</div>
             
             <div class="post-content">
-              <p>github+hexo 搭建</p>
-<!-- more -->
-<h1 id="githubhexo-搭建">github+hexo 搭建</h1>
-<hr>
-<h2 id="github-部分">github 部分</h2>
-<p><a href="https://github.com/">github.com</a><br>
-github.com 注册<br>
-你的 github 地址：github.com/username（你的注册名）<br>
-start a project 按钮新建一个 repositories（仓库）<br>
-仓库名：username <font color=#008000><strong>(和上面一样，这里不要用别的)</strong></font>.github.io<br>
-creat repository 创建仓库</p>
-<hr>
-<h2 id="git-及-nodejs-安装">git 及 node.js 安装</h2>
-<p><a href="https://git-scm.com/">git</a><br>
-一直下一步不多说<br>
-安装完了右键 git bash</p>
-<pre><code class="language-bash">git config user.name 'github用户名'
-git config user.email '邮箱'
+              <h2 id="换源">换源</h2>
+<pre><code>rm /etc/apt/sources.list.d/pve-enterprise.list
+
+wget http://mirrors.ustc.edu.cn/proxmox/debian/proxmox-ve-release-5.x.gpg -O /etc/apt/trusted.gpg.d/proxmox-ve-release-5.x.gpg
+
+wget http://mirrors.ustc.edu.cn/proxmox/debian/proxmox-ve-release-6.x.gpg -O /etc/apt/trusted.gpg.d/proxmox-ve-release-6.x.gpg
+
+echo 'deb http://mirrors.ustc.edu.cn/proxmox/debian buster pve-no-subscription'&gt;/etc/apt/sources.list.d/pve-install-repo.list
+
+sed -i 's/ftp.debian.org/mirrors.163.com/g' /etc/apt/sources.list
+sed -i 's/security.debian.org/mirrors.163.com\/debian-security/g' /etc/apt/sources.list
+
+apt update
+apt dist-upgrade
 </code></pre>
-<p><a href="https://nodejs.org/en/">node.js</a><br>
-下载完一直下一步安装</p>
-<pre><code>node -v
-npm -v
-git -version
+<p>##去订阅弹窗</p>
+<pre><code>sed -i &quot;s/data.status !== 'Active'/false/g&quot; /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
 </code></pre>
-<p>看一下 node.js,npm,git 版本信息<br>
-以上没成功，环境变量自己再看下</p>
-<hr>
-<h2 id="hexo-部分">hexo 部分</h2>
-<p><a href="https://hexo.io/zh-cn/">hexo.io</a><br>
-右键 git bash here<br>
-输入以下</p>
-<pre><code class="language-bash">npm install hexo-cli -g
-hexo init blog
-cd blog
-npm install
-hexo server
-</code></pre>
-<p>安装出现 warn 都不要管<br>
-上面会自动创建一个 blog 文件夹，进入 blog 并启动 hexo<br>
-地址在本地 4000 端口<br>
-<a href="http://localhost:4000/">http://localhost:4000/</a></p>
-<p>在 blog/source/_posts 下有自动创建的一篇 helloworld 的初始化文章</p>
-<p>如果想要添加新的文章，可以在命令行输入 hexo new 'filename',就会生成一个新的.md 文件，对它编辑就可以了</p>
-<hr>
-<h2 id="上传至-github">上传至 github</h2>
-<p>开配置文档_config.yml，对它做如下修改</p>
-<pre><code>deploy:
-  type: git
-  repo: git@github.com:username/username.github.io.git
-  branch: master
-</code></pre>
-<p>git bash 中输入</p>
-<pre><code>npm install hexo-deployer-git --save
-</code></pre>
-<p>安装 git 插件<br>
-再输入</p>
-<pre><code>hexo g
-hexo d
-</code></pre>
-<p>开始上传<br>
-打开 username.github.io blog 就部署好了</p>
-<hr>
-<p>结束</p>
 
             </div>
-            
-              <div class="tag-container">
-                
-                  <a href="https://569487134xuyi.github.io/tag/qZr56g8Uq" class="tag">
-                    hexo
-                  </a>
-                
-              </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://569487134xuyi.github.io/post/hello-gridea">
+                <a href="https://569487134xuyi.github.io/post/suan-suan-ru">
                   <h3 class="post-title">
-                    Hello Gridea
+                    酸酸乳
                   </h3>
                 </a>
               </div>

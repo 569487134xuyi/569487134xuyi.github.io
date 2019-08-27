@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://569487134xuyi.github.io</id>
     <title>xuyi.blog</title>
-    <updated>2019-08-13T12:30:29.076Z</updated>
+    <updated>2019-08-27T08:29:09.078Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://569487134xuyi.github.io"/>
     <link rel="self" href="https://569487134xuyi.github.io/atom.xml"/>
@@ -10,6 +10,32 @@
     <logo>https://569487134xuyi.github.io/images/avatar.png</logo>
     <icon>https://569487134xuyi.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, xuyi.blog</rights>
+    <entry>
+        <title type="html"><![CDATA[PVE设置]]></title>
+        <id>https://569487134xuyi.github.io/post/pve-she-zhi</id>
+        <link href="https://569487134xuyi.github.io/post/pve-she-zhi">
+        </link>
+        <updated>2019-08-27T08:10:38.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="换源">换源</h2>
+<pre><code>rm /etc/apt/sources.list.d/pve-enterprise.list
+
+wget http://mirrors.ustc.edu.cn/proxmox/debian/proxmox-ve-release-5.x.gpg -O /etc/apt/trusted.gpg.d/proxmox-ve-release-5.x.gpg
+
+wget http://mirrors.ustc.edu.cn/proxmox/debian/proxmox-ve-release-6.x.gpg -O /etc/apt/trusted.gpg.d/proxmox-ve-release-6.x.gpg
+
+echo 'deb http://mirrors.ustc.edu.cn/proxmox/debian buster pve-no-subscription'&gt;/etc/apt/sources.list.d/pve-install-repo.list
+
+sed -i 's/ftp.debian.org/mirrors.163.com/g' /etc/apt/sources.list
+sed -i 's/security.debian.org/mirrors.163.com\/debian-security/g' /etc/apt/sources.list
+
+apt update
+apt dist-upgrade
+</code></pre>
+<p>##去订阅弹窗</p>
+<pre><code>sed -i &quot;s/data.status !== 'Active'/false/g&quot; /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[酸酸乳]]></title>
         <id>https://569487134xuyi.github.io/post/suan-suan-ru</id>
