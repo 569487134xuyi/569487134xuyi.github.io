@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://569487134xuyi.github.io</id>
     <title>xuyi.blog</title>
-    <updated>2019-08-27T08:29:09.078Z</updated>
+    <updated>2019-08-27T08:51:06.966Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://569487134xuyi.github.io"/>
     <link rel="self" href="https://569487134xuyi.github.io/atom.xml"/>
@@ -10,6 +10,72 @@
     <logo>https://569487134xuyi.github.io/images/avatar.png</logo>
     <icon>https://569487134xuyi.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, xuyi.blog</rights>
+    <entry>
+        <title type="html"><![CDATA[Docker脚本]]></title>
+        <id>https://569487134xuyi.github.io/post/docker-jiao-ben</id>
+        <link href="https://569487134xuyi.github.io/post/docker-jiao-ben">
+        </link>
+        <updated>2019-08-27T08:30:22.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="transmission">transmission</h2>
+<pre><code>docker create \
+  --name=transmission \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Europe/London \
+  -e TRANSMISSION_WEB_HOME=/transmission-web-control/  \
+  -e USER=xuyi  \
+  -e PASS=zzz569487134  \
+  -p 9091:9091 \
+  -p 51413:51413 \
+  -p 51413:51413/udp \
+  -v /path/to/config:/config \
+  -v /path/to/download:/downloads \
+  -v /path/to/watch:/watch \
+  --restart unless-stopped \
+  linuxserver/transmission
+</code></pre>
+<h2 id="samba">samba</h2>
+<pre><code>docker run -it -e TZ=Asia/Shanghai --name samba -p 139:139 -p 445:445 -v /path/to/share:/mount -d dperson/samba  -u &quot;username;password&quot; -s &quot;share;/mount;yes;no;yes;&quot;
+</code></pre>
+<h2 id="远程迅雷">远程迅雷</h2>
+<pre><code>docker run -d \
+        --restart always \
+        --name xware \
+        --net host \
+        -v /path/to/download:/app/TDDOWNLOAD \
+        -v /path/to/config:/app/bin/cfg \
+        senorsen/docker-thunder-xware
+</code></pre>
+<h2 id="dlna">DLNA</h2>
+<pre><code>docker run -d --net=host \
+  -p 8200:8200 \
+  -v /path/to/share:/media \
+  -e MINIDLNA_MEDIA_DIR=/media \
+  -e MINIDLNA_FRIENDLY_NAME=MyMini \
+  vladgh/minidlna
+### docker-compose
+version: '3.1'
+services:
+  minidlna:
+    image: vladgh/minidlna
+    container_name: minidlna
+    restart: always
+    network_mode: 'host'
+    environment:
+      - MINIDLNA_MEDIA_DIR=/media
+      - MINIDLNA_FRIENDLY_NAME=MiniDLNA
+      - MINIDLNA_INOTIFY=yes
+      - MINIDLNA_NOTIFY_INTERVAL=30
+    volumes:
+      - /path/to/config:/var/lib/minidlna
+      - /path/to/share:/media
+    logging:
+      driver: &quot;json-file&quot;
+      options:
+        max-size: &quot;1m&quot;
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[PVE设置]]></title>
         <id>https://569487134xuyi.github.io/post/pve-she-zhi</id>

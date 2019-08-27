@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>标签列表 | xuyi.blog</title>
+<title>Docker脚本 | xuyi.blog</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -91,16 +91,87 @@
 
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
-          <h2 class="tag-list-title">标签列表</h2>
-          <div class="tags-container">
+          <div class="post-detail">
+            <h2 class="post-title">Docker脚本</h2>
+            <div class="post-date">2019-08-27</div>
             
-              <a class="tag" href="https://569487134xuyi.github.io/tag/j5oKSxFAT">docker</a>
+            <div class="post-content">
+              <h2 id="transmission">transmission</h2>
+<pre><code>docker create \
+  --name=transmission \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Europe/London \
+  -e TRANSMISSION_WEB_HOME=/transmission-web-control/  \
+  -e USER=xuyi  \
+  -e PASS=zzz569487134  \
+  -p 9091:9091 \
+  -p 51413:51413 \
+  -p 51413:51413/udp \
+  -v /path/to/config:/config \
+  -v /path/to/download:/downloads \
+  -v /path/to/watch:/watch \
+  --restart unless-stopped \
+  linuxserver/transmission
+</code></pre>
+<h2 id="samba">samba</h2>
+<pre><code>docker run -it -e TZ=Asia/Shanghai --name samba -p 139:139 -p 445:445 -v /path/to/share:/mount -d dperson/samba  -u &quot;username;password&quot; -s &quot;share;/mount;yes;no;yes;&quot;
+</code></pre>
+<h2 id="远程迅雷">远程迅雷</h2>
+<pre><code>docker run -d \
+        --restart always \
+        --name xware \
+        --net host \
+        -v /path/to/download:/app/TDDOWNLOAD \
+        -v /path/to/config:/app/bin/cfg \
+        senorsen/docker-thunder-xware
+</code></pre>
+<h2 id="dlna">DLNA</h2>
+<pre><code>docker run -d --net=host \
+  -p 8200:8200 \
+  -v /path/to/share:/media \
+  -e MINIDLNA_MEDIA_DIR=/media \
+  -e MINIDLNA_FRIENDLY_NAME=MyMini \
+  vladgh/minidlna
+### docker-compose
+version: '3.1'
+services:
+  minidlna:
+    image: vladgh/minidlna
+    container_name: minidlna
+    restart: always
+    network_mode: 'host'
+    environment:
+      - MINIDLNA_MEDIA_DIR=/media
+      - MINIDLNA_FRIENDLY_NAME=MiniDLNA
+      - MINIDLNA_INOTIFY=yes
+      - MINIDLNA_NOTIFY_INTERVAL=30
+    volumes:
+      - /path/to/config:/var/lib/minidlna
+      - /path/to/share:/media
+    logging:
+      driver: &quot;json-file&quot;
+      options:
+        max-size: &quot;1m&quot;
+</code></pre>
+
+            </div>
             
-              <a class="tag" href="https://569487134xuyi.github.io/tag/qZr56g8Uq">hexo</a>
             
-              <a class="tag" href="https://569487134xuyi.github.io/tag/gridea">Gridea</a>
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://569487134xuyi.github.io/post/pve-she-zhi">
+                  <h3 class="post-title">
+                    PVE设置
+                  </h3>
+                </a>
+              </div>
             
+
+            
+
           </div>
+
         </div>
       </div>
     </div>
