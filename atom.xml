@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://569487134xuyi.github.io</id>
     <title>xuyi.blog</title>
-    <updated>2019-08-27T08:51:06.966Z</updated>
+    <updated>2019-11-09T10:59:24.043Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://569487134xuyi.github.io"/>
     <link rel="self" href="https://569487134xuyi.github.io/atom.xml"/>
@@ -10,6 +10,48 @@
     <logo>https://569487134xuyi.github.io/images/avatar.png</logo>
     <icon>https://569487134xuyi.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, xuyi.blog</rights>
+    <entry>
+        <title type="html"><![CDATA[nps-server nps-client docker 脚本]]></title>
+        <id>https://569487134xuyi.github.io/post/nps-docker-jiao-ben</id>
+        <link href="https://569487134xuyi.github.io/post/nps-docker-jiao-ben">
+        </link>
+        <updated>2019-11-09T10:41:58.000Z</updated>
+        <content type="html"><![CDATA[<p>#nps-server dockerfile</p>
+<pre><code class="language-Dockerfile">FROM alpine:3.10
+
+WORKDIR /
+ENV NPS_VERSION 0.23.2
+ENV NPS_RELEASE_URL https://github.com/cnlh/nps/releases/download/v0.23.2/linux_amd64_server.tar.gz
+
+RUN set -x &amp;&amp; \
+	wget --no-check-certificate ${NPS_RELEASE_URL} &amp;&amp; \ 
+	tar xzf linux_amd64_server.tar.gz &amp;&amp; \
+    rm linux_amd64_server.tar.gz
+
+VOLUME /nps/conf
+
+CMD /nps/nps
+</code></pre>
+<p>#nps-clinet dockerfile</p>
+<pre><code class="language-Dockerfile">FROM alpine:3.10
+
+WORKDIR /
+ENV NPC_VERSION 0.23.2
+ENV NPS_RELEASE_URL https://github.com/cnlh/nps/releases/download/v0.23.2/linux_amd64_client.tar.gz
+RUN set -x &amp;&amp; \
+	wget --no-check-certificate ${NPS_RELEASE_URL} &amp;&amp; \ 
+	tar xzf linux_amd64_client.tar.gz &amp;&amp; \
+	mv /nps /npc
+
+ENV SERVERIP 127.0.0.1:8284
+ENV VKEY 123
+
+CMD /npc/npc -server=${SERVERIP} -vkey=${VKEY}
+</code></pre>
+<p>##启动客户端</p>
+<pre><code>docker run -d --name npc -e SERVERIP=ip:port -e VKEY=key zzz7886856/npc-client</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Docker脚本]]></title>
         <id>https://569487134xuyi.github.io/post/docker-jiao-ben</id>

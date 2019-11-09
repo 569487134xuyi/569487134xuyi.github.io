@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>PVE设置 | xuyi.blog</title>
+<title>nps-server nps-client docker 脚本 | xuyi.blog</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -92,37 +92,61 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">PVE设置</h2>
-            <div class="post-date">2019-08-27</div>
+            <h2 class="post-title">nps-server nps-client docker 脚本</h2>
+            <div class="post-date">2019-11-09</div>
             
             <div class="post-content">
-              <h2 id="换源">换源</h2>
-<pre><code>rm /etc/apt/sources.list.d/pve-enterprise.list
+              <p>#nps-server dockerfile</p>
+<pre><code class="language-Dockerfile">FROM alpine:3.10
 
-wget http://mirrors.ustc.edu.cn/proxmox/debian/proxmox-ve-release-5.x.gpg -O /etc/apt/trusted.gpg.d/proxmox-ve-release-5.x.gpg
+WORKDIR /
+ENV NPS_VERSION 0.23.2
+ENV NPS_RELEASE_URL https://github.com/cnlh/nps/releases/download/v0.23.2/linux_amd64_server.tar.gz
 
-wget http://mirrors.ustc.edu.cn/proxmox/debian/proxmox-ve-release-6.x.gpg -O /etc/apt/trusted.gpg.d/proxmox-ve-release-6.x.gpg
+RUN set -x &amp;&amp; \
+	wget --no-check-certificate ${NPS_RELEASE_URL} &amp;&amp; \ 
+	tar xzf linux_amd64_server.tar.gz &amp;&amp; \
+    rm linux_amd64_server.tar.gz
 
-echo 'deb http://mirrors.ustc.edu.cn/proxmox/debian buster pve-no-subscription'&gt;/etc/apt/sources.list.d/pve-install-repo.list
+VOLUME /nps/conf
 
-sed -i 's/ftp.debian.org/mirrors.163.com/g' /etc/apt/sources.list
-sed -i 's/security.debian.org/mirrors.163.com\/debian-security/g' /etc/apt/sources.list
-
-apt update
-apt dist-upgrade
+CMD /nps/nps
 </code></pre>
-<p>##去订阅弹窗</p>
-<pre><code>sed -i &quot;s/data.status !== 'Active'/false/g&quot; /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
+<p>#nps-clinet dockerfile</p>
+<pre><code class="language-Dockerfile">FROM alpine:3.10
+
+WORKDIR /
+ENV NPC_VERSION 0.23.2
+ENV NPS_RELEASE_URL https://github.com/cnlh/nps/releases/download/v0.23.2/linux_amd64_client.tar.gz
+RUN set -x &amp;&amp; \
+	wget --no-check-certificate ${NPS_RELEASE_URL} &amp;&amp; \ 
+	tar xzf linux_amd64_client.tar.gz &amp;&amp; \
+	mv /nps /npc
+
+ENV SERVERIP 127.0.0.1:8284
+ENV VKEY 123
+
+CMD /npc/npc -server=${SERVERIP} -vkey=${VKEY}
 </code></pre>
+<p>##启动客户端</p>
+<pre><code>docker run -d --name npc -e SERVERIP=ip:port -e VKEY=key zzz7886856/npc-client</code></pre>
 
             </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://569487134xuyi.github.io/tag/j5oKSxFAT" class="tag">
+                    docker
+                  </a>
+                
+              </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://569487134xuyi.github.io/post/suan-suan-ru">
+                <a href="https://569487134xuyi.github.io/post/docker-jiao-ben">
                   <h3 class="post-title">
-                    酸酸乳
+                    Docker脚本
                   </h3>
                 </a>
               </div>
