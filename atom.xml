@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://569487134xuyi.github.io</id>
     <title>xuyi.blog</title>
-    <updated>2019-11-09T10:59:24.043Z</updated>
+    <updated>2019-12-24T11:46:09.612Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://569487134xuyi.github.io"/>
     <link rel="self" href="https://569487134xuyi.github.io/atom.xml"/>
@@ -10,6 +10,102 @@
     <logo>https://569487134xuyi.github.io/images/avatar.png</logo>
     <icon>https://569487134xuyi.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, xuyi.blog</rights>
+    <entry>
+        <title type="html"><![CDATA[Docker中运行OpenWrt作旁路由]]></title>
+        <id>https://569487134xuyi.github.io/post/docker-zhong-yun-xing-openwrt-zuo-pang-lu-you</id>
+        <link href="https://569487134xuyi.github.io/post/docker-zhong-yun-xing-openwrt-zuo-pang-lu-you">
+        </link>
+        <updated>2019-12-24T11:44:49.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="在docker中运行openwrt教程">在Docker中运行OpenWrt教程</h1>
+<p>软件环境：<br>
+Win10中运行的vm中运行的ubuntu中运行的Docker</p>
+<p>网络环境：<br>
+主路由：192.168.3.1/24 //没用到。。。<br>
+Win10（主机）：192.168.3.15 //没用到。。。<br>
+ubuntu（vm NAT模式）：192.168.78.128<br>
+vm网关192.168.78.2<br>
+OpenWrt（ubuntu中的Docker中运行）：192.168.78.135</p>
+<h2 id="一-开启网卡混杂模式重要"><s>一、开启网卡混杂模式（重要）</s></h2>
+<p><s>首先要开启Hyper-V中Debian虚拟机网卡的混杂模式，否则OpenWrt无法连网，主机也ping不通OpenWrt。</s></p>
+<p><s>Enable promiscuous mode in Hyper-V:<br>
+Hyper-V &gt; VM &gt; Settings &gt; NIC (click plus) &gt; ADVANCED FEATURE &gt; Enable MAC Address Spoofing<br>
+(https://serverfault.com/questions/812528/docker-container-connection-in-macvlan-network)</s></p>
+<p><s>如果是Linux环境，那么用ip link set eth0 promisc on即可。</s><br>
+以上未验证</p>
+<h2 id="二-选择openwrt镜像">二、选择OpenWrt镜像</h2>
+<p>推荐两个：<br>
+https://www.right.com.cn/forum/thread-866582-1-1.html<br>
+<strong>https://www.right.com.cn/forum/thread-762559-1-1.html</strong>/用的这个，密码admin</p>
+<h2 id="三-将openwrt镜像导入docker">三、将OpenWrt镜像导入Docker</h2>
+<pre><code>mkdir ~/openwrt
+mkdir /mnt/openwrt
+cd ~/openwrt
+mount -o loop openwrt-x86-64-rootfs-squashfs.img /mnt/openwrt
+cd /mnt/openwrt/
+tar zcf ~/openwrt/openwrt.tgz *
+cd ~/openwrt
+docker import openwrt.tgz openwrt
+umount /mnt/openwrt
+rm -r /mnt/openwrt
+</code></pre>
+<p>以上加sudo权限</p>
+<h2 id="四-运行openwrt容器">四、运行OpenWrt容器</h2>
+<p>docker network create -d macvlan --subnet=192.168.78.0/24 --gateway=192.168.78.2 -o parent=eth0(我这里是ens33） macvlan0 # 创建docker macvlan网络<br>
+docker run --restart=always --privileged --name='openwrt' --net=macvlan0 --ip=192.168.2.135 --detach=true openwrt /sbin/init # 运行openwrt容器<br>
+docker exec -it openwrt /bin/sh # 进入openwrt容器shell<br>
+vi /etc/config/network # 编辑openwrt网络配置</p>
+<pre><code>config interface 'lan'
+        option type 'bridge'
+        option ifname 'eth0'//eth0没修改，可以进管理页面，下次试试改ens33
+        option proto 'static'
+        option ipaddr '192.168.78.135'//修改管理地址
+        option netmask '255.255.255.0'
+        option ip6assign '60'
+        option gateway '192.168.78.2'//修改网关
+        option dns '192.168.78.2'
+</code></pre>
+<pre><code>/etc/init.d/network restart //重启网络
+</code></pre>
+<h2 id="以下未验证管理页面能进"><strong>以下未验证,管理页面能进</strong></h2>
+<h2 id="五-docker宿主机debian配置网络"><s>五、Docker宿主机（Debian）配置网络</s></h2>
+<p>注意：修改网络配置可能会让你失去对宿主机（Debian）的网络连接。</p>
+<p>临时配置网络（重启后失效）<br>
+添加macvlan桥接网卡，并将192.168.2.8分配到该网卡<br>
+ip addr del 192.168.2.8/24 dev eth0; <br>
+ip link add macvlan link eth0 type macvlan mode bridge; <br>
+ip addr add 192.168.2.8/24 dev macvlan; <br>
+ip link set macvlan up; \</p>
+<p>替换默认路由到macvlan网卡<br>
+ip route del 192.168.2.0/24 dev eth0; <br>
+ip route del default; <br>
+ip route add 192.168.2.0/24 dev macvlan; <br>
+ip route add default via 192.168.2.1 dev macvlan;</p>
+<p>永久配置网络（重启也能生效）<br>
+宿主机（Debian）修改网络配置：vi /etc/network/interface</p>
+<p>将：</p>
+<p>auto eth0<br>
+iface eth0 inet static<br>
+address 192.168.2.8<br>
+broadcast 192.168.2.255<br>
+netmask 255.255.255.0<br>
+gateway 192.168.2.1<br>
+dns-nameservers 192.168.2.1<br>
+修改为：</p>
+<p>auto eth0<br>
+iface eth0 inet manual</p>
+<p>auto macvlan<br>
+iface macvlan inet static<br>
+address 192.168.2.8<br>
+netmask 255.255.255.0<br>
+gateway 192.168.2.1<br>
+dns-nameservers 192.168.2.1<br>
+pre-up ip link add macvlan link eth0 type macvlan mode bridge<br>
+post-down ip link del macvlan link eth0 type macvlan mode bridge<br>
+修改完后重启网络systemctl restart networking或者重启系统查看效果。</p>
+<h2 id="六-打开openwrt管理页面">六、打开Openwrt管理页面</h2>
+<p><s>此时，如果配置正常的话</s>，在局域网中就可以访问 http://192.168.78.135/ 来打开OpenWrt的管理页面了。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[nps-server nps-client docker 脚本]]></title>
         <id>https://569487134xuyi.github.io/post/nps-docker-jiao-ben</id>
