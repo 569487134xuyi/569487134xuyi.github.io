@@ -2,18 +2,18 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://569487134xuyi.github.io</id>
     <title>xuyi.blog</title>
-    <updated>2019-12-24T11:46:09.612Z</updated>
+    <updated>2020-03-29T12:05:04.652Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://569487134xuyi.github.io"/>
     <link rel="self" href="https://569487134xuyi.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
     <logo>https://569487134xuyi.github.io/images/avatar.png</logo>
     <icon>https://569487134xuyi.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2019, xuyi.blog</rights>
+    <rights>All rights reserved 2020, xuyi.blog</rights>
     <entry>
         <title type="html"><![CDATA[Docker中运行OpenWrt作旁路由]]></title>
-        <id>https://569487134xuyi.github.io/post/docker-zhong-yun-xing-openwrt-zuo-pang-lu-you</id>
-        <link href="https://569487134xuyi.github.io/post/docker-zhong-yun-xing-openwrt-zuo-pang-lu-you">
+        <id>https://569487134xuyi.github.io/post/docker-zhong-yun-xing-openwrt-zuo-pang-lu-you/</id>
+        <link href="https://569487134xuyi.github.io/post/docker-zhong-yun-xing-openwrt-zuo-pang-lu-you/">
         </link>
         <updated>2019-12-24T11:44:49.000Z</updated>
         <content type="html"><![CDATA[<h1 id="在docker中运行openwrt教程">在Docker中运行OpenWrt教程</h1>
@@ -104,12 +104,14 @@ post-down ip link del macvlan link eth0 type macvlan mode bridge<br>
 修改完后重启网络systemctl restart networking或者重启系统查看效果。</p>
 <h2 id="六-打开openwrt管理页面">六、打开Openwrt管理页面</h2>
 <p><s>此时，如果配置正常的话</s>，在局域网中就可以访问 http://192.168.78.135/ 来打开OpenWrt的管理页面了。</p>
+<h2 id="七">七、</h2>
+<p>失败了，主路由不是openwrt，ping不通网络</p>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[nps-server nps-client docker 脚本]]></title>
-        <id>https://569487134xuyi.github.io/post/nps-docker-jiao-ben</id>
-        <link href="https://569487134xuyi.github.io/post/nps-docker-jiao-ben">
+        <id>https://569487134xuyi.github.io/post/nps-docker-jiao-ben/</id>
+        <link href="https://569487134xuyi.github.io/post/nps-docker-jiao-ben/">
         </link>
         <updated>2019-11-09T10:41:58.000Z</updated>
         <content type="html"><![CDATA[<p>#nps-server dockerfile</p>
@@ -150,8 +152,8 @@ CMD /npc/npc -server=${SERVERIP} -vkey=${VKEY}
     </entry>
     <entry>
         <title type="html"><![CDATA[Docker脚本]]></title>
-        <id>https://569487134xuyi.github.io/post/docker-jiao-ben</id>
-        <link href="https://569487134xuyi.github.io/post/docker-jiao-ben">
+        <id>https://569487134xuyi.github.io/post/docker-jiao-ben/</id>
+        <link href="https://569487134xuyi.github.io/post/docker-jiao-ben/">
         </link>
         <updated>2019-08-27T08:30:22.000Z</updated>
         <content type="html"><![CDATA[<h2 id="transmission">transmission</h2>
@@ -216,8 +218,8 @@ services:
     </entry>
     <entry>
         <title type="html"><![CDATA[PVE设置]]></title>
-        <id>https://569487134xuyi.github.io/post/pve-she-zhi</id>
-        <link href="https://569487134xuyi.github.io/post/pve-she-zhi">
+        <id>https://569487134xuyi.github.io/post/pve-she-zhi/</id>
+        <link href="https://569487134xuyi.github.io/post/pve-she-zhi/">
         </link>
         <updated>2019-08-27T08:10:38.000Z</updated>
         <content type="html"><![CDATA[<h2 id="换源">换源</h2>
@@ -242,8 +244,8 @@ apt dist-upgrade
     </entry>
     <entry>
         <title type="html"><![CDATA[酸酸乳]]></title>
-        <id>https://569487134xuyi.github.io/post/suan-suan-ru</id>
-        <link href="https://569487134xuyi.github.io/post/suan-suan-ru">
+        <id>https://569487134xuyi.github.io/post/suan-suan-ru/</id>
+        <link href="https://569487134xuyi.github.io/post/suan-suan-ru/">
         </link>
         <updated>2019-08-13T12:05:34.000Z</updated>
         <content type="html"><![CDATA[<p>#服务器推荐<br>
@@ -263,8 +265,8 @@ apt dist-upgrade
     </entry>
     <entry>
         <title type="html"><![CDATA[Docker]]></title>
-        <id>https://569487134xuyi.github.io/post/docker</id>
-        <link href="https://569487134xuyi.github.io/post/docker">
+        <id>https://569487134xuyi.github.io/post/docker/</id>
+        <link href="https://569487134xuyi.github.io/post/docker/">
         </link>
         <updated>2019-06-09T09:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>docker 安装配置</p>
@@ -360,8 +362,8 @@ docker run -d -p 9000:9000 \
     </entry>
     <entry>
         <title type="html"><![CDATA[hexo]]></title>
-        <id>https://569487134xuyi.github.io/post/hexo</id>
-        <link href="https://569487134xuyi.github.io/post/hexo">
+        <id>https://569487134xuyi.github.io/post/hexo/</id>
+        <link href="https://569487134xuyi.github.io/post/hexo/">
         </link>
         <updated>2019-06-02T11:30:00.000Z</updated>
         <summary type="html"><![CDATA[<p>github+hexo 搭建</p>
@@ -434,8 +436,8 @@ hexo d
     </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://569487134xuyi.github.io/post/hello-gridea</id>
-        <link href="https://569487134xuyi.github.io/post/hello-gridea">
+        <id>https://569487134xuyi.github.io/post/hello-gridea/</id>
+        <link href="https://569487134xuyi.github.io/post/hello-gridea/">
         </link>
         <updated>2018-12-11T16:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
